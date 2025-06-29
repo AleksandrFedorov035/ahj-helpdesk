@@ -1,0 +1,187 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-ticket, .modal-content button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.add-ticket:hover, .modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.tickets {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.ticket {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ticket-content {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  margin-right: 15px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+
+.check {
+  display: none;
+  font-size: 15px;
+}
+
+.ticket-value {
+  flex: 1;
+}
+
+.ticket-date {
+  margin-right: 10px;
+}
+
+.change-ticket,
+.remove-ticket {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.change-ticket:hover,
+.remove-ticket:hover {
+  background-color: #f2f2f2;
+}
+
+.detailedDescription {
+  padding: 0 20px;
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.modal-content input, .modal-content textarea {
+  display: block;
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  resize: none;
+  font-family: monospace;
+}
+
+.modal-content .cancelButton {
+  background-color: #ccc;
+  color: black;
+  margin-left: 10px;
+}
+
+.modal-content .cancelButton:hover {
+  background-color: #999;
+}
+
+.delete-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.delete-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+}
+
+.delete-modal-content h2 {
+  margin-top: 0;
+}
+
+.delete-modal-content .cancel-button {
+  background-color: #ccc;
+  color: black;
+  margin-left: 10px;
+}
+
+.delete-modal-content .cancel-button:hover {
+  background-color: #999;
+}
+
+.delete-modal-content .ok-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-modal-content .ok-button:hover {
+  background-color: #0056b3;
+}
