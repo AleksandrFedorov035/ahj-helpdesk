@@ -3,7 +3,7 @@ export default class Ticket {
         this.container = container;
         this.renderUI();
 
-        this.sendRequest = this.sendRequest.bind(this)
+        this.sendRequest = this.sendRequest.bind(this);
     }
 
     renderUI() {
@@ -35,27 +35,33 @@ export default class Ticket {
             </div>
         `;
         this.container.innerHTML = html;
+
+        // Добавляем события кнопкам
         this.container
-            .querySelector(".add-ticket")
-            .addEventListener("click", (e) => this.showPopUp(e));
+            .querySelector('.add-ticket')
+            .addEventListener('click', (e) => this.showPopUp(e));
+
         this.container
-            .querySelector(".cancelButton")
-            .addEventListener("click", () => this.closePopUp());
+            .querySelector('.cancelButton')
+            .addEventListener('click', () => this.closePopUp());
+
         this.container
-            .querySelector(".addButton")
-            .addEventListener("click", (e) => {
-                if (
-                    document.querySelector(".modal h2").textContent === "Добавить тикет"
-                )
+            .querySelector('.addButton')
+            .addEventListener('click', (e) => {
+                if (document.querySelector('.modal h2').textContent === 'Добавить тикет') {
                     this.addTicket(e);
-                else this.updateTicket(e);
+                } else {
+                    this.updateTicket(e);
+                }
             });
+
         this.container
-            .querySelector(".cancel-button")
-            .addEventListener("click", () => this.closeDeleteModal());
+            .querySelector('.cancel-button')
+            .addEventListener('click', () => this.closeDeleteModal());
+
         this.container
-            .querySelector(".ok-button")
-            .addEventListener("click", () => this.deleteTicket());
+            .querySelector('.ok-button')
+            .addEventListener('click', () => this.deleteTicket());
     }
 
     showPopUp(e) {
@@ -93,33 +99,25 @@ export default class Ticket {
         `;
     }
 
-    sendRequest(method, bodyData = {}) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api?' + method);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        xhr.onload = () => {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                } catch (err) {
-                    console.error(err);
-                }
-            }
-        };
-
-        xhr.send(JSON.stringify(bodyData));
+    async sendRequest(method, data) {
+        const url = `http://localhost:7070/api?method=${method}`; // Используем правильный адрес сервера
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) throw new Error(response.statusText); // Обрабатываем ошибку, если статус неудачный
+            return await response.json(); // Возвращаем данные в виде JSON
+        } catch (err) {
+            console.error('Ошибка при отправке запроса:', err.message);
+        }
     }
 
     addTicket(e) {
         e.preventDefault();
-
-        let shortDescriptionValue = document
-            .querySelector('#shortDescription')
-            .value.trim();
-        let detailedDescription = document
-            .querySelector('#detailedDescription')
-            .value.trim();
+        let shortDescriptionValue = document.querySelector('#shortDescription').value.trim();
+        let detailedDescription = document.querySelector('#detailedDescription').value.trim();
 
         if (!shortDescriptionValue || !detailedDescription) {
             this.showErrorMessage('Заполните все поля!');
@@ -133,8 +131,7 @@ export default class Ticket {
             created: this.getDate()
         };
 
-        this.sendRequest('method=createTicket', newTicket);
-
+        this.sendRequest('createTicket', newTicket); // Отправляем новый тикет
         this.closePopUp();
     }
 
@@ -178,13 +175,8 @@ export default class Ticket {
 
     updateTicket(e) {
         e.preventDefault();
-
-        let shortDescriptionValue = document
-            .querySelector('#shortDescription')
-            .value.trim();
-        let detailedDescription = document
-            .querySelector('#detailedDescription')
-            .value.trim();
+        let shortDescriptionValue = document.querySelector('#shortDescription').value.trim();
+        let detailedDescription = document.querySelector('#detailedDescription').value.trim();
 
         if (!shortDescriptionValue || !detailedDescription) {
             this.showErrorMessage('Заполните все поля!');
@@ -199,8 +191,7 @@ export default class Ticket {
             id: this.currentEditingTicket.id
         };
 
-        this.sendRequest(`method=updateById&id=${updatedTicket.id}`, updatedTicket);
-
+        this.sendRequest(`updateById?id=${updatedTicket.id}`, updatedTicket); // Обновляем существующий тикет
         this.closePopUp();
     }
 
@@ -215,9 +206,7 @@ export default class Ticket {
 
     deleteTicket() {
         const ticketToRemove = this.currentDeletingTicket;
-
-        this.sendRequest(`method=deleteById&id=${ticketToRemove.id}`);
-
+        this.sendRequest(`deleteById?id=${ticketToRemove.id}`); // Удаляем тикет
         ticketToRemove.remove();
         this.closeDeleteModal();
     }

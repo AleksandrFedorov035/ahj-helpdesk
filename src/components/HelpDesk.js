@@ -18,7 +18,7 @@ export default class HelpDesk {
                         <input type="text" id="shortDescription" name="shortDescription" required />
                         <label for="detailedDescription">Подробное описание</label>
                         <textarea id="detailedDescription" name="detailedDescription" rows="4" cols="50"></textarea>
-                        <button type="button" class="addButton">Ок</button>
+                        <button type="submit" class="addButton">Ок</button>
                         <button type="button" class="cancelButton">Отмена</button>
                     </form>
                 </div>
@@ -36,12 +36,14 @@ export default class HelpDesk {
     this.container
       .querySelector(".add-ticket")
       .addEventListener("click", (e) => this.showPopUp(e));
+
     this.container
       .querySelector(".cancelButton")
       .addEventListener("click", () => this.closePopUp());
+
     this.container
       .querySelector(".addButton")
-      .addEventListener("click", (e) => {
+      .addEventListener("submit", (e) => {
         if (
           document.querySelector(".modal h2").textContent === "Добавить тикет"
         )
@@ -51,9 +53,11 @@ export default class HelpDesk {
     this.container
       .querySelector(".cancel-button")
       .addEventListener("click", () => this.closeDeleteModal());
+
     this.container
       .querySelector(".ok-button")
       .addEventListener("click", () => this.deleteTicket());
+
   }
 
   showPopUp(e) {
