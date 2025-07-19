@@ -58,8 +58,11 @@ body {
 }
 
 .check {
-  display: none;
   font-size: 15px;
+}
+
+.check.false {
+  display: none;
 }
 
 .check.true {

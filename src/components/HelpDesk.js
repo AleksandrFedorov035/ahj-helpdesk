@@ -41,8 +41,9 @@ export default class HelpDesk {
     this.container
       .querySelector(".addButton")
       .addEventListener("click", (e) => {
-        if (document.querySelector(".modal h2").textContent === "Добавить тикет") this.addTicket(e);
-        else this.editTicket(e);
+        document.querySelector(".modal h2").textContent === "Добавить тикет"
+        ? this.addTicket(e)
+        : this.editTicket(e);
       });
     this.container
       .querySelector(".cancel-button")
@@ -55,18 +56,20 @@ export default class HelpDesk {
 
 
     this.container.querySelector('.tickets').addEventListener('click', (event) => {
-      if (event.target.matches('.checkbox') || event.target.matches('.check')) this.handleCheckboxChange(event.target.closest(".ticket"))
-      if (event.target.matches('.remove-ticket') || event.target.matches('.fa-trash')) this.container.querySelector('.delete-modal').style.display = "block"
-      else if (event.target.matches('.change-ticket') || event.target.matches('.fa-pen')) this.showPopUp(event)
-      else if (
-        event.target.classList.contains('ticket-content') ||
-        event.target.classList.contains('ticket-date') ||
-        event.target.classList.contains('ticket-value') ||
-        event.target.classList.contains('ticket')
-      ) this.showDescription(event)
+      const target = event.target;
 
-      this.targetElement = event.target.closest(".ticket")
-    })
+      if (target.matches('.checkbox') || target.matches('.check')) {
+        this.handleCheckboxChange(target.closest('.ticket'));
+      } else if (target.matches('.remove-ticket') || target.matches('.fa-trash')) {
+        this.container.querySelector('.delete-modal').style.display = "block";
+      } else if (target.matches('.change-ticket') || target.matches('.fa-pen')) {
+        this.showPopUp(event);
+      } else if (target.closest('.ticket')) {
+        this.showDescription(event);
+      }
+
+      this.targetElement = target.closest('.ticket');
+    });
 
     this.renderTickets()
   }
@@ -169,8 +172,8 @@ export default class HelpDesk {
     const newTicket = {
       id: null,
       name: shortDescriptionValue,
-      description: detailedDescription,
-      status: false
+      status: false,
+      description: detailedDescription
     };
 
     try {
@@ -211,8 +214,7 @@ export default class HelpDesk {
 
     const newTicket = {
       name: shortDescriptionValue,
-      description: detailedDescription,
-      status: false
+      description: detailedDescription
     };
 
     try {
