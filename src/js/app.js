@@ -1,14 +1,6 @@
-// import HelpDesk from "../components/HelpDesk";
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const container = document.querySelector(".container");
-//   new HelpDesk(container);
-// });
-
-
-import Ticket from "../components/Ticket";
+import HelpDesk from "../components/HelpDesk";
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".container");
-  new Ticket(container);
-})
+  new HelpDesk(container);
+});

@@ -13,7 +13,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.add-ticket, .modal-content button {
+.add-ticket,
+.modal-content button {
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
@@ -22,7 +23,8 @@ body {
   cursor: pointer;
 }
 
-.add-ticket:hover, .modal-content button:hover {
+.add-ticket:hover,
+.modal-content button:hover {
   background-color: #0056b3;
 }
 
@@ -58,6 +60,10 @@ body {
 .check {
   display: none;
   font-size: 15px;
+}
+
+.check.true {
+  display: block;
 }
 
 .ticket-value {
@@ -102,7 +108,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -122,7 +128,8 @@ body {
   margin-bottom: 7px;
 }
 
-.modal-content input, .modal-content textarea {
+.modal-content input,
+.modal-content textarea {
   display: block;
   width: 95%;
   padding: 10px;
@@ -152,7 +159,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .delete-modal-content {
@@ -167,19 +174,26 @@ body {
   margin-top: 0;
 }
 
-.delete-modal-content .cancel-button {
+.cancel-button {
   background-color: #ccc;
   color: black;
   margin-left: 10px;
 }
 
-.delete-modal-content .cancel-button:hover {
-  background-color: #999;
-}
-
-.delete-modal-content .ok-button {
+.ok-button {
   background-color: #007bff;
   color: white;
+}
+
+.ok-button, .cancel-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+}
+
+.delete-modal-content .cancel-button:hover {
+  background-color: #999;
 }
 
 .delete-modal-content .ok-button:hover {
