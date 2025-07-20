@@ -42,8 +42,8 @@ export default class HelpDesk {
       .querySelector(".addButton")
       .addEventListener("click", (e) => {
         document.querySelector(".modal h2").textContent === "Добавить тикет"
-        ? this.addTicket(e)
-        : this.editTicket(e);
+          ? this.addTicket(e)
+          : this.editTicket(e);
       });
     this.container
       .querySelector(".cancel-button")
@@ -146,14 +146,12 @@ export default class HelpDesk {
     return response.json();
   }
 
-  renderTickets() {
-    this.getAllTickets().then(res => {
-      this.tickets = [...res]
-      this.tickets.forEach(el => {
-        const _ticket = new Ticket(el)
-        this.container.querySelector('.tickets').insertAdjacentHTML("beforeend", _ticket.renderTicket())
-      })
-
+  async renderTickets() {
+    const res = await this.getAllTickets()
+    this.tickets = [...res]
+    this.tickets.forEach(el => {
+      const _ticket = new Ticket(el)
+      this.container.querySelector('.tickets').insertAdjacentHTML("beforeend", _ticket.renderTicket())
     })
   }
 
